@@ -1,0 +1,9 @@
+.wallpaper {
+    height: 200px;
+    overflow: hidden;
+}
+
+.wallpaper img {    
+    width: 100%;
+    
+}
