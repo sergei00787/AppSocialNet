@@ -1,15 +1,21 @@
 import React from 'react';
-import style from './Profile.module.css'
-import MyPosts from './MyPosts/MyPosts'
+import style from './Profile.module.css';
+import MyPosts from './MyPosts/MyPosts';
+import Wallpaper from './Wallpaper/Wallpaper';
+
 
 const Profile = () => {
+  const Posts = [
+    { id:1, message: "HI, I'm cool hacker=)", countLikes: 100 },
+    { id:2, message: "HI, I'm cool hacker=)", countLikes: 1000 },
+    { id:3, message: "HI, I'm cool hacker=)", countLikes: 10000 },
+    { id:4, message: "HI, I'm cool hacker=)", countLikes: 100000 },
+  ]
+
   return (
     <div>
-      <div className={style.wallpaper}>
-        <img src="https://www.tokkoro.com/picsup/5571787-social-network-wallpapers.jpg" />
-      </div>
-      <div className="">ava + desc</div>
-      <MyPosts />
+      <Wallpaper />
+      <MyPosts Posts={Posts}/>
     </div>
   )
 }
