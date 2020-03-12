@@ -5,8 +5,9 @@ import Post from './Post/Post'
 const MyPosts = (props) => {
 
   let addPost = () => {
+
     let text = refTextArea.current.value;
-    alert(text);
+    props.addPost(text);
   }
 
   let refTextArea = React.createRef();

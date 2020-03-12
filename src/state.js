@@ -1,4 +1,4 @@
-const State = {
+let State = {
     DialogState: {
         Dialogs: [
             { id: 1, dialogName: "Sergey" },
@@ -26,5 +26,16 @@ const State = {
     }
     
 }
+
+export let addPost = (postMessage) => {
+    State.ProfileState.Posts.push(
+        {
+            id: 5,
+            message: postMessage,
+            countLikes: 0
+        }
+    )
+}
+
 
 export default State;

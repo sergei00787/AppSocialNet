@@ -18,7 +18,7 @@ function App(props) {
           {/* <Route path="/profile" component={Profile} />
           <Route path="/dialog" component={Dialogs} /> */}
 
-          <Route path="/profile" render={() => <Profile profileState={props.state.ProfileState}/>} />
+          <Route path="/profile" render={() => <Profile profileState={props.state.ProfileState} addPost={props.addPost}/>} />
           <Route path="/dialog" render={() => <Dialogs dialogState={props.state.DialogState}/>} />
         </div>
 
