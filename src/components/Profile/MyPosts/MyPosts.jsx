@@ -8,6 +8,7 @@ const MyPosts = (props) => {
 
     let text = refTextArea.current.value;
     props.addPost(text);
+    refTextArea.current.value = "";
   }
 
   let refTextArea = React.createRef();

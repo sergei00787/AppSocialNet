@@ -1,12 +1,13 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+//import React from 'react';
+//import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
+//import App from './App';
 import * as serviceWorker from './serviceWorker';
 import State from './state';
-import {addPost} from './state';
+//import { addPost } from './state';
+import rerender from './render';
 
-ReactDOM.render(<App state={State} addPost={addPost}/>, document.getElementById('root'));
+rerender(State);
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
