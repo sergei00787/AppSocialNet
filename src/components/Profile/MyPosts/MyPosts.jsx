@@ -1,14 +1,21 @@
 import React from 'react';
 // import cssMyPosts from './MyPosts.module.css'
-import Post from './Post/Post'
+import Post from './Post/Post';
+import { addPostActionCreator, updateNewPostTextActionCreator } from '../../../state';
+
 
 const MyPosts = (props) => {
 
   let refTextArea = React.createRef();
 
   let addPost = () => {
-    props.dispatch({type:'ADD-POST'});
+    props.dispatch(addPostActionCreator());
   }  
+
+  let onPostChange = () => {
+    let text = refTextArea.current.value;
+    props.dispatch(updateNewPostTextActionCreator(text));
+  }
 
   const Posts = props.Posts.map(post => {
     return (
@@ -16,10 +23,7 @@ const MyPosts = (props) => {
     )
   });
 
-  let onPostChange = () => {
-    let text = refTextArea.current.value;
-    props.dispatch({type:'UPDATE-NEW-POST-TEXT', newText:text});
-  }
+  
 
   return (
     <div className="MyPosts">My Post
