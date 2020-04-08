@@ -29,31 +29,38 @@ let store = {
         }
     },
 
+    _callSubscriber() { console.log("state changed"); },
+
+
     getState(){
         return this._state;
     },
 
-    _callSubscriber() { console.log("state changed"); },
-
-    addPost(){
-        let newPost = {
-            id:5,
-            message: this._state.ProfileState.NewPost,
-            countLikes: 0
-        }
-        this._state.ProfileState.Posts.push(newPost);
-        this._state.ProfileState.NewPost = '';
-        this._callSubscriber(this._state);
-    },
-
-    updateNewPostText(newText){
-        this._state.ProfileState.NewPost = newText;
-        this._callSubscriber(this._state);
-    },
-
     subscribe(observer){
         this._callSubscriber = observer
+    },
+    
+    dispatch(action){
+        switch(action.type) {
+            case 'ADD-POST':
+                let newPost = {
+                    id:5,
+                    message: this._state.ProfileState.NewPost,
+                    countLikes: 0
+                }
+                this._state.ProfileState.Posts.push(newPost);
+                this._state.ProfileState.NewPost = '';
+                this._callSubscriber(this._state);
+            break;
+            case 'UPDATE-NEW-POST-TEXT':
+                this._state.ProfileState.NewPost = action.newText;
+                this._callSubscriber(this._state);
+            break;
+            default:
+                window.alert("НЕТ ТАКОГО ДЕЙСТВИЯ");
+        }
     }
+    
 
 }
 

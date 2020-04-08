@@ -7,7 +7,7 @@ const MyPosts = (props) => {
   let refTextArea = React.createRef();
 
   let addPost = () => {
-    props.addPost();
+    props.dispatch({type:'ADD-POST'});
   }  
 
   const Posts = props.Posts.map(post => {
@@ -18,7 +18,7 @@ const MyPosts = (props) => {
 
   let onPostChange = () => {
     let text = refTextArea.current.value;
-    props.updateNewPostText(text);
+    props.dispatch({type:'UPDATE-NEW-POST-TEXT', newText:text});
   }
 
   return (
