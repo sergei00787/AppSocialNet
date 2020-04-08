@@ -4,14 +4,11 @@ import Post from './Post/Post'
 
 const MyPosts = (props) => {
 
-  let addPost = () => {
-
-    let text = refTextArea.current.value;
-    props.addPost(text);
-    refTextArea.current.value = "";
-  }
-
   let refTextArea = React.createRef();
+
+  let addPost = () => {
+    props.addPost();
+  }  
 
   const Posts = props.Posts.map(post => {
     return (
@@ -19,10 +16,19 @@ const MyPosts = (props) => {
     )
   });
 
+  let onPostChange = () => {
+    let text = refTextArea.current.value;
+    props.updateNewPostText(text);
+  }
+
   return (
     <div className="MyPosts">My Post
-      <div className="newPost">
-        <textarea className="newPost" ref={refTextArea}>New post</textarea>
+      <div className="newPostContainer">
+        <textarea className="newPost" 
+                  ref={refTextArea} 
+                  value = {props.NewPost} 
+                  onChange={onPostChange}/>
+
         <button onClick = {addPost} >Add post</button>
       </div>
       { Posts }
