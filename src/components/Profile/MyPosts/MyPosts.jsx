@@ -6,14 +6,13 @@ import { addPostActionCreator, updateNewPostTextActionCreator } from '../../../s
 
 const MyPosts = (props) => {
 
-  let refTextArea = React.createRef();
-
   let addPost = () => {
     props.dispatch(addPostActionCreator());
   }  
 
-  let onPostChange = () => {
-    let text = refTextArea.current.value;
+  let onPostChange = (event) => {
+    // let text = refTextArea.current.value;
+    let text = event.target.value;
     props.dispatch(updateNewPostTextActionCreator(text));
   }
 
@@ -29,7 +28,6 @@ const MyPosts = (props) => {
     <div className="MyPosts">My Post
       <div className="newPostContainer">
         <textarea className="newPost" 
-                  ref={refTextArea} 
                   value = {props.NewPost} 
                   onChange={onPostChange}/>
 

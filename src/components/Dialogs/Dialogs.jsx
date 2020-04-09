@@ -3,14 +3,19 @@ import style from './Dialogs.module.css'
 
 import DialogItem from './DialogItem/DialogItem';
 import Message from './Message/Message';
+import { sendMessageActionCreator, updateNewMessageTextActionCreator } from '../../state';
 
 const Dialogs = (props) => {
 
-  let refAreaMessAdd = React.createRef();
+  // let refAreaMessAdd = React.createRef();
 
-  let addMessage = () => {
-    let text = refAreaMessAdd.current.value;
-    alert(text);
+  let sendMessage = () => {
+    props.dispatch(sendMessageActionCreator());
+  }
+
+  let onMessageChange = (event) => {
+    let text = event.target.value;
+    props.dispatch(updateNewMessageTextActionCreator(text));
   }
 
   const DialogsElements = props.dialogState.Dialogs.map(dialog => {
@@ -33,8 +38,8 @@ const Dialogs = (props) => {
       <div className={style.messagesBox}>
         {MessagesElements}
         <div className="containerMessAdd">
-          <textarea ref={refAreaMessAdd}></textarea>
-          <button className="addMessage" onClick={addMessage}>Add message</button>
+          <textarea onChange={onMessageChange} value={props.dialogState.NewMessage} ></textarea>
+          <button className="addMessage" onClick={sendMessage}>Add message</button>
         </div>
       </div>
 

@@ -2,10 +2,14 @@
 const ADD_POST = 'ADD-POST';
 const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
 
+const SEND_MESSAGE = 'SEND-MESSAGE';
+const UPDATE_NEW_MESSAGE_TEXT = 'UPDATE-NEW-MESSAGE-TEXT';
+
 
 let store = {
     _state: {
         DialogState: {
+            NewMessage: "",
             Dialogs: [
                 { id: 1, dialogName: "Sergey" },
                 { id: 2, dialogName: "Alesya" },
@@ -16,9 +20,9 @@ let store = {
     
             Messages: [
                 { id: 1, message: "Hi" },
-                { id: 1, message: "How are you" },
-                { id: 1, message: "Buy" },
-                { id: 1, message: "No" }
+                { id: 2, message: "How are you" },
+                { id: 3, message: "Buy" },
+                { id: 4, message: "No" }
             ],
         },
     
@@ -46,9 +50,10 @@ let store = {
     
     dispatch(action){
         switch(action.type) {
-            case 'ADD-POST':
+
+            case ADD_POST:
                 let newPost = {
-                    id:5,
+                    id:6,
                     message: this._state.ProfileState.NewPost,
                     countLikes: 0
                 }
@@ -56,10 +61,27 @@ let store = {
                 this._state.ProfileState.NewPost = '';
                 this._callSubscriber(this._state);
             break;
-            case 'UPDATE-NEW-POST-TEXT':
+
+            case UPDATE_NEW_POST_TEXT:
                 this._state.ProfileState.NewPost = action.newText;
                 this._callSubscriber(this._state);
             break;
+
+            case SEND_MESSAGE:
+                let newMessage = {
+                    id:5,
+                    message: this._state.DialogState.NewMessage,
+                }
+                this._state.DialogState.Messages.push(newMessage);
+                this._state.DialogState.NewMessage = '';
+                this._callSubscriber(this._state);
+            break;
+
+            case UPDATE_NEW_MESSAGE_TEXT:
+                this._state.DialogState.NewMessage = action.messageText;
+                this._callSubscriber(this._state);
+            break;
+
             default:
                 window.alert("НЕТ ТАКОГО ДЕЙСТВИЯ");
         }
@@ -69,6 +91,10 @@ let store = {
 export let addPostActionCreator = () => ({ type: ADD_POST });
 
 export let updateNewPostTextActionCreator = (text) => ({ type:UPDATE_NEW_POST_TEXT, newText:text} );
+
+export let sendMessageActionCreator = () => ({ type: SEND_MESSAGE });
+
+export let updateNewMessageTextActionCreator = (text) => ({ type:UPDATE_NEW_MESSAGE_TEXT, messageText:text} );
 
 window.store = store;
 
