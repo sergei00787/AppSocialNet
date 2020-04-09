@@ -1,10 +1,6 @@
 
-const ADD_POST = 'ADD-POST';
-const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
-
-const SEND_MESSAGE = 'SEND-MESSAGE';
-const UPDATE_NEW_MESSAGE_TEXT = 'UPDATE-NEW-MESSAGE-TEXT';
-
+import profileReducer from './profileReducer';
+import dialogsReducer from './dialogsReducer';
 
 let store = {
     _state: {
@@ -49,52 +45,13 @@ let store = {
     },
     
     dispatch(action){
-        switch(action.type) {
 
-            case ADD_POST:
-                let newPost = {
-                    id:6,
-                    message: this._state.ProfileState.NewPost,
-                    countLikes: 0
-                }
-                this._state.ProfileState.Posts.push(newPost);
-                this._state.ProfileState.NewPost = '';
-                this._callSubscriber(this._state);
-            break;
+        this._state.ProfileState = profileReducer(this._state.ProfileState, action);
+        this._state.DialogState = dialogsReducer(this._state.DialogState, action);
+        this._callSubscriber(this._state);
 
-            case UPDATE_NEW_POST_TEXT:
-                this._state.ProfileState.NewPost = action.newText;
-                this._callSubscriber(this._state);
-            break;
-
-            case SEND_MESSAGE:
-                let newMessage = {
-                    id:5,
-                    message: this._state.DialogState.NewMessage,
-                }
-                this._state.DialogState.Messages.push(newMessage);
-                this._state.DialogState.NewMessage = '';
-                this._callSubscriber(this._state);
-            break;
-
-            case UPDATE_NEW_MESSAGE_TEXT:
-                this._state.DialogState.NewMessage = action.messageText;
-                this._callSubscriber(this._state);
-            break;
-
-            default:
-                window.alert("НЕТ ТАКОГО ДЕЙСТВИЯ");
-        }
     }
 }
-
-export let addPostActionCreator = () => ({ type: ADD_POST });
-
-export let updateNewPostTextActionCreator = (text) => ({ type:UPDATE_NEW_POST_TEXT, newText:text} );
-
-export let sendMessageActionCreator = () => ({ type: SEND_MESSAGE });
-
-export let updateNewMessageTextActionCreator = (text) => ({ type:UPDATE_NEW_MESSAGE_TEXT, messageText:text} );
 
 window.store = store;
 

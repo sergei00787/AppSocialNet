@@ -3,7 +3,7 @@ import style from './Dialogs.module.css'
 
 import DialogItem from './DialogItem/DialogItem';
 import Message from './Message/Message';
-import { sendMessageActionCreator, updateNewMessageTextActionCreator } from '../../state';
+import { sendMessageActionCreator, updateNewMessageTextActionCreator } from '../../dialogsReducer';
 
 const Dialogs = (props) => {
 
