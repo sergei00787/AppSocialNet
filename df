@@ -1,0 +1,83 @@
+[33mcommit a6c8bb48f8b2e3078ec4080c77a9263bc65a2fff[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m)[m
+Author: sergei00787 <sergei007_87@mail.ru>
+Date:   Thu Apr 9 13:31:31 2020 +0700
+
+    Add reducer to Dialog and Message #41
+
+[33mcommit bcdc3039cf394cef52ef047f0ccb99ac31f6f680[m[33m ([m[1;31mAppSocialNet/master[m[33m)[m
+Author: sergei00787 <sergei007_87@mail.ru>
+Date:   Thu Apr 9 10:50:36 2020 +0700
+
+    Add functional send message
+
+[33mcommit 6fc70d2b8fc775f680861ff7757d2c1a9e865cd3[m
+Author: sergei00787 <sergei007_87@mail.ru>
+Date:   Wed Apr 8 14:37:19 2020 +0700
+
+    Add action creator #39
+
+[33mcommit 8074576ff76c716676e75b13ff0637a96420be8c[m
+Author: sergei00787 <sergei007_87@mail.ru>
+Date:   Wed Apr 8 13:42:40 2020 +0700
+
+    Add dispatch and action #38
+
+[33mcommit da43bc2ce05f32af6ae4e84337585cc391e1f10c[m
+Author: sergei00787 <sergei007_87@mail.ru>
+Date:   Wed Apr 8 12:28:03 2020 +0700
+
+    Add store #37
+
+[33mcommit ef42555abc63031ccb3c10575c4bc482a42f4ea6[m
+Author: sergei00787 <sergei007_87@mail.ru>
+Date:   Mon Mar 16 18:46:38 2020 +0700
+
+    Functional Add posts #33
+
+[33mcommit 0f95edca7542afab67c72975081acfffc68d4c27[m
+Author: sergei00787 <sergei007_87@mail.ru>
+Date:   Thu Mar 12 23:37:34 2020 +0700
+
+    Functional Add Message and Add post - iteration 2 #32
+
+[33mcommit fe2f073eb47b574e23de9cfe2d3e978dd17707d0[m
+Author: sergei00787 <sergei007_87@mail.ru>
+Date:   Thu Mar 12 22:31:19 2020 +0700
+
+    Functional Add Message and Add post - first iteration #31
+
+[33mcommit 3fd08a7c1246169ab00a5e4a3444dabd90b2b2a3[m
+Author: sergei00787 <sergei007_87@mail.ru>
+Date:   Tue Mar 10 23:41:18 2020 +0700
+
+    Decomposition Post, Message, Dialogs #26.2
+
+[33mcommit 0a05c25c9669350e22153aee728160ed6172df72[m
+Author: sergei00787 <sergei007_87@mail.ru>
+Date:   Tue Mar 10 23:26:50 2020 +0700
+
+    Decomposition Post, Message, Dialogs #26
+
+[33mcommit a5c1c68a8211e8b78712a52170140bfb461e0a23[m
+Author: sergei00787 <sergei007_87@mail.ru>
+Date:   Sun Mar 1 23:33:06 2020 +0700
+
+    Add dialog page #18
+
+[33mcommit 01ad16d1a098f08297597424995f4a95ea5ce14d[m
+Author: sergei00787 <sergei007_87@mail.ru>
+Date:   Fri Feb 28 23:20:18 2020 +0700
+
+    Initial project #14
+
+[33mcommit d4fd5e9cbac47aa678886be41e8b3df5ec0c4dab[m
+Author: sergei00787 <sergei007_87@mail.ru>
+Date:   Fri Feb 28 23:17:00 2020 +0700
+
+    Initial project #14
+
+[33mcommit 133e3b2cfc1482a204025d28fda8fd0472c0225c[m
+Author: sergei00787 <sergei007_87@mail.ru>
+Date:   Wed Feb 26 20:06:13 2020 +0700
+
+    Initialize project using Create React App
