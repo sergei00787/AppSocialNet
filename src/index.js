@@ -5,9 +5,10 @@ import * as serviceWorker from './serviceWorker';
 import store from './components/redux/redux-store';
 import { BrowserRouter } from 'react-router-dom';
 import './index.css';
-import {Provider} from './components/redux/context/store-context';
+//import {Provider} from './components/redux/context/store-context';
+import {Provider} from 'react-redux';
 
-let rerender = (state) => {
+// let rerender = (state) => {
   ReactDOM.render(
     <BrowserRouter>
       <Provider store={store}>
@@ -15,14 +16,14 @@ let rerender = (state) => {
       </Provider>
     </BrowserRouter>
     , document.getElementById('root'));
-}
+// }
 
-rerender(store.getState());
+// rerender(store.getState());
 
-store.subscribe(() => {
-  let state = store.getState();
-  rerender(state);
-});
+// store.subscribe(() => {
+//   let state = store.getState();
+//   rerender(state);
+// });
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

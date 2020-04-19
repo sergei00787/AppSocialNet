@@ -10,7 +10,8 @@ const Navbar = (props) => {
     { id: 2, name: "Messages", path: "/dialog" },
     { id: 3, name: "News", path: "/news" },
     { id: 4, name: "Music", path: "/music" },
-    { id: 5, name: "Settings", path: "/settings" }
+    { id: 5, name: "Settings", path: "/settings" },
+    { id: 6, name: "Find Users", path: "/users" }
   ]
 
   const listNav = ArrNav.map((navItem) => {
@@ -23,18 +24,6 @@ const Navbar = (props) => {
   return (
     <nav className={cssNavbar.nav}>
       {listNav}
-
-
-
-      {/* <div className={cssNavbar.item}>
-        <NavLink to="/profile" activeClassName={cssNavbar.activeLink} >Profile</NavLink>
-      </div>
-      <div className={cssNavbar.item}>
-        <NavLink to="/dialog" activeClassName={cssNavbar.activeLink} >Messages</NavLink>
-      </div>
-      <div className={cssNavbar.item}><a>News</a></div>
-      <div className={cssNavbar.item}><a>Music</a></div>
-      <div className={cssNavbar.item}><a>Settings</a></div> */}
     </nav>
   )
 }
