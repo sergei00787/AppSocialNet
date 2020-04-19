@@ -1,0 +1,11 @@
+.userselement {
+    margin: 10px;
+    border: 2px solid rgb(223, 31, 31);
+    border-radius: 10px;
+}
+
+.smallAva{
+    display:block;
+    border-radius: 50% 50%;
+    margin: 10px 5px;
+}

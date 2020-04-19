@@ -1,10 +1,16 @@
 import React from 'react';
-import styles from './Users.module.css'
+import style from './Users.module.css';
+import * as axios from 'axios';
 
 let Users = (props) => {
 
   if (props.users.length === 0) {
 
+    axios.get("https://social-network.samuraijs.com/api/1.0/users?count=100&page=2")
+    .then(response => {
+      props.setUsers(response.data.items);
+    })
+    /*
     props.setUsers([
       {
         id: 1,
@@ -28,7 +34,7 @@ let Users = (props) => {
         lastName: "Buymova", 
         location: { city: "myski", address: 'vahrushev street' } 
       }
-    ])
+    ])*/
   }
 
 
@@ -36,17 +42,18 @@ let Users = (props) => {
     <div className="userswrap">
       {
         props.users.map(u =>           
-            <div key={u.id} className="users-element">
+            <div key={u.id} className={style.userselement}>
               <div>
-                <img src={u.imgUrl} alt="" />
+                <img className={style.smallAva} src={u.photos.small != null ? u.photos.small : "https://social-network.samuraijs.com/activecontent/images/users/7049/user-small.jpg?v=1"} alt="" />
+                <img src={u.photos.large} alt="" />
                 {u.followed  
                 ? <button onClick={ () => {props.unfollow(u.id) } }>Unfollow</button>
                 : <button onClick={ () => {props.follow(u.id) } }>Follow</button>}
               </div>
               <div>
-                <div>{u.firstName}</div>
-                <div>{u.lastName}</div>
-                <div>{u.location.cyty}</div>
+                <div>Name: {u.name}</div>
+                <div>STATUS: {u.status}</div>
+                <div>{u.uniqueUrlName}</div>
               </div>
             </div>
         )
