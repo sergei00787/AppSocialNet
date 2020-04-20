@@ -6,9 +6,9 @@ import Users from './Users'
 
 
 class UsersConteiner extends React.Component {
-  constructor(props) {
+  /*constructor(props) {
     super(props);
-  }
+  }*/
 
   getUsers = () => {
     axios.get(`https://social-network.samuraijs.com/api/1.0/users?count=${this.props.usersInPageCount}&page=${this.props.currentPage}`)

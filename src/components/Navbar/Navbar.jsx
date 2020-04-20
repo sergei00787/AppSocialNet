@@ -16,7 +16,7 @@ const Navbar = (props) => {
 
   const listNav = ArrNav.map((navItem) => {
     return (
-      <div className={cssNavbar.item}>
+      <div key={navItem.id} className={cssNavbar.item}>
         <NavLink to={navItem.path} activeClassName={cssNavbar.activeLink} > {navItem.name} </NavLink>
       </div>)
   });
