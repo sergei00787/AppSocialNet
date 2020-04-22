@@ -18,6 +18,7 @@ import {Provider} from 'react-redux';
     , document.getElementById('root'));
 // }
 
+window.store = store;
 // rerender(store.getState());
 
 // store.subscribe(() => {

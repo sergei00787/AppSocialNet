@@ -7,7 +7,6 @@ const Wallpaper = () => {
             <div className={style.wallpaper}>
                 <img src="https://www.tokkoro.com/picsup/5571787-social-network-wallpapers.jpg" alt="Pictures wallpaper"/>
             </div>
-            <div className="">ava + desc</div>
         </div>
 
     )
