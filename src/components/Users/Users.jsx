@@ -1,12 +1,20 @@
 import React from 'react';
 import style from './Users.module.css';
 import { NavLink } from 'react-router-dom';
-import * as axios from 'axios';
+import { usersApi } from './../api/api';
 
 const Users = (props) => {
   let pages = [];
   for (let i = 1; i <= props.pageCount; i++) {
     pages.push(i);
+  }
+
+  let handlerFollow = (id) => {
+    usersApi.follow(id).then(response => { if (response.resultCode === 0) props.follow(id); })
+  }
+
+  let handlerUnfollow = (id) => {
+    usersApi.unfollow(id).then(response => { if (response.resultCode === 0) props.unfollow(id); })
   }
 
   return (
@@ -34,32 +42,8 @@ const Users = (props) => {
               </NavLink>
               <img src={u.photos.large} alt="" />
               {u.followed
-                ? <button onClick={() => {
-                  axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, 
-                                { withCredentials: true,
-                                  headers: { "API-KEY": "bcb971f4-bdbf-4eeb-8ecd-aa42107df5c0" } 
-                                })
-                    .then(response => {
-                      if (response.data.resultCode === 0) {
-                        props.unfollow(u.id);
-                      }
-                    })
-                }}>Unfollow</button>
-                : <button onClick={() => {
-
-                  axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`,
-                    {},
-                    {
-                      withCredentials: true,
-                      headers: { "API-KEY": "bcb971f4-bdbf-4eeb-8ecd-aa42107df5c0" }
-                    }
-                  )
-                    .then(response => {
-                      if (response.data.resultCode === 0) {
-                        props.follow(u.id);
-                      }
-                    })
-                }}>Follow</button>}
+                ? <button onClick={() => handlerUnfollow(u.id) } >Unfollow</button>
+                : <button onClick={() => handlerFollow(u.id) } >Follow</button>}
             </div>
             <div>
               <div>Name: {u.name}</div>
