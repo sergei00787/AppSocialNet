@@ -7,3 +7,12 @@
 .header img {
     width: 80px;
 }
+
+.loginName {
+    float: right;
+}
+
+.loginName a {
+    text-decoration: none;
+    color: white;
+}

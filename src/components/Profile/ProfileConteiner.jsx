@@ -22,9 +22,11 @@ class ProfileContainer extends React.Component
   }
 
   render () {
+    
     if (!this.props.profile) {
       return <Preloader />
     }
+    
     return (
       <Profile {...this.props.profile} />
     )
