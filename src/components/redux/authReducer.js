@@ -1,5 +1,5 @@
 const SET_AUTH_DATA = "SET_AUTH_DATA";
-const TOGGLE_IS_FETCHING = "TOGGLE_IS_FETCHING";
+const TOGGLE_IS_AUTH_FETCHING = "TOGGLE_IS_AUTH_FETCHING";
 
 let initState = {
   isAuthFetching: false,
@@ -19,7 +19,7 @@ const authReducer = (state = initState, action) => {
       }
     }
 
-    case TOGGLE_IS_FETCHING: {
+    case TOGGLE_IS_AUTH_FETCHING: {
       return { ...state, isAuthFetching: action.isFetching }
     }
 
@@ -28,6 +28,6 @@ const authReducer = (state = initState, action) => {
 }
 
 export let setAuthData = (userId, email, login) => ({ type: SET_AUTH_DATA, userId, email, login });
-export let toggleIsAuthFetching = (isFetching) => ({ type: TOGGLE_IS_FETCHING, isFetching })
+export let toggleIsAuthFetching = (isFetching) => ({ type: TOGGLE_IS_AUTH_FETCHING, isFetching })
 
 export default authReducer;

@@ -10,6 +10,9 @@ const Profile = (props) => {
   return (
     <div>
       <Wallpaper />
+      {!props.fullName ?
+        null
+      :
       <div className="profileWrap">
         <div>{props.fullName}</div>
         <div>{props.lookingForAJob}</div>
@@ -23,7 +26,8 @@ const Profile = (props) => {
         <div>{props.contacts.youtube}</div>
         <div>{props.contacts.mainLink}</div>
         <img src={props.photos.large} alt=""/>
-      </div>
+      </div>}
+      
       <MyPostsConteiner />
     </div>
   )
