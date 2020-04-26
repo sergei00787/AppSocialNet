@@ -10,11 +10,25 @@ const Users = (props) => {
   }
 
   let handlerFollow = (id) => {
-    usersApi.follow(id).then(response => { if (response.resultCode === 0) props.follow(id); })
+    props.fetchingFollower(true, id);
+    usersApi.follow(id)
+      .then(response => { if (response.resultCode === 0) {
+        props.follow(id); 
+        props.fetchingFollower(false, id);
+        } 
+      });
+      
   }
 
   let handlerUnfollow = (id) => {
-    usersApi.unfollow(id).then(response => { if (response.resultCode === 0) props.unfollow(id); })
+    props.fetchingFollower(true, id);
+    usersApi.unfollow(id)
+      .then(response => { if (response.resultCode === 0) {
+        props.unfollow(id); 
+        props.fetchingFollower(false, id);
+        } 
+      });
+      
   }
 
   return (
@@ -42,8 +56,10 @@ const Users = (props) => {
               </NavLink>
               <img src={u.photos.large} alt="" />
               {u.followed
-                ? <button onClick={() => handlerUnfollow(u.id) } >Unfollow</button>
-                : <button onClick={() => handlerFollow(u.id) } >Follow</button>}
+                ? <button onClick = {() => handlerUnfollow(u.id) } 
+                          disabled = {props.fetchingFollowerList.some(id => id === u.id)} >Unfollow</button>
+                : <button onClick={() => handlerFollow(u.id) } 
+                          disabled = {props.fetchingFollowerList.some(id => id === u.id)} >Follow</button>}
             </div>
             <div>
               <div>Name: {u.name}</div>

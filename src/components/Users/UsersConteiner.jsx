@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { follow, unfollow, setUsers, setUsersTotalCount, setPageCount, setCurrentPage, toggleIsFetching } from '../redux/usersReducer';
+import { follow, unfollow, setUsers, setUsersTotalCount, setPageCount, setCurrentPage, toggleIsFetching, fetchingFollower } from '../redux/usersReducer';
 import Users from './Users'
 import Preloader from './../Preloader/Preloader';
 import { usersApi } from './../api/api';
@@ -54,6 +54,8 @@ class UsersConteiner extends React.Component {
           users={this.props.users}
           follow={this.props.follow}
           unfollow={this.props.unfollow}
+          fetchingFollower = {this.props.fetchingFollower}
+          fetchingFollowerList = {this.props.fetchingFollowerList}         
         />
       </>
 
@@ -69,11 +71,12 @@ let mapStateToProps = (state) => {
     pageCount: state.UsersState.pageCount,
     currentPage: state.UsersState.currentPage,
     usersInPageCount: state.UsersState.usersInPageCount,
-    isFetching: state.UsersState.isFetching
+    isFetching: state.UsersState.isFetching,
+    fetchingFollowerList: state.UsersState.fetchingFollowerList
   }
 }
 
 
-let objDispatch = { follow, unfollow, setUsers, setUsersTotalCount, setPageCount, setCurrentPage, toggleIsFetching }
+let objDispatch = { follow, unfollow, setUsers, setUsersTotalCount, setPageCount, setCurrentPage, toggleIsFetching, fetchingFollower }
 
 export default connect(mapStateToProps, objDispatch)(UsersConteiner);
