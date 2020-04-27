@@ -7,7 +7,8 @@ let initState = {
   isAuthFetching: false,
   userId: null,
   email: null,
-  login: null
+  login: null,
+  isAuth: false
 }
 
 const authReducer = (state = initState, action) => {
@@ -17,7 +18,8 @@ const authReducer = (state = initState, action) => {
         ...state,
         userId: action.userId,
         email: action.email,
-        login: action.login
+        login: action.login,
+        isAuth: true
       }
     }
 
@@ -37,8 +39,10 @@ export const authMeTC = () => {
     dispatch(toggleIsAuthFetching(true));
     headerApi.authMe().then(response => {
       dispatch(toggleIsAuthFetching(false));
-      let { id, email, login } = response.data;
-      dispatch(setAuthData(id, email, login));
+      if (response.data.resultCode === 0) {
+        let { id, email, login } = response.data.data;
+        dispatch(setAuthData(id, email, login));
+      }      
     })
   }
 };

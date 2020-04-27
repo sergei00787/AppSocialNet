@@ -39,7 +39,7 @@ class ProfileAPI {
 
 class HeaderAPI {
   authMe = () => {
-    return instanceAxios.get('auth/me').then(response => {return response.data});
+    return instanceAxios.get('auth/me').then(response => {return response});
   }
 }
 

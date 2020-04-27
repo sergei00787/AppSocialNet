@@ -6,7 +6,7 @@ import { authMeTC } from './../redux/authReducer'
 class HeaderContainer extends React.Component {
 
   componentDidMount() {
-    if (this.props.login === null) {
+    if (!this.props.isAuth) {
       this.props.authMe();
     }
 
@@ -14,7 +14,7 @@ class HeaderContainer extends React.Component {
 
   render() {
     return (
-      <Header login={this.props.login} email={this.props.email} userId={this.props.userId} isAuthFetching={this.props.isAuthFetching} />
+      <Header {...this.props} />
     )
   }
 }
@@ -24,7 +24,8 @@ let mapStateToProps = (state) => {
     userId: state.Auth.userId,
     email: state.Auth.email,
     login: state.Auth.login,
-    isAuthFetching: state.Auth.isAuthFetching
+    isAuthFetching: state.Auth.isAuthFetching,
+    isAuth: state.Auth.isAuth
   })
 
 }
