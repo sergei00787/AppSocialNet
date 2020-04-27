@@ -1,46 +1,20 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { follow, unfollow, setUsers, setUsersTotalCount, setPageCount, setCurrentPage, toggleIsFetching, fetchingFollower } from '../redux/usersReducer';
+import { setUsers, setCurrentPage, fetchingFollower, getUsersTC, getUsersTotalCountTC, followTC, unfollowTC } from '../redux/usersReducer';
 import Users from './Users'
 import Preloader from './../Preloader/Preloader';
-import { usersApi } from './../api/api';
 
 class UsersConteiner extends React.Component {
 
-  getUsers = () => {
-    this.props.toggleIsFetching(true);
-    usersApi.getUsers(this.props.usersInPageCount, this.props.currentPage)
-      .then(response => {
-        this.props.toggleIsFetching(false);
-        this.props.setUsers(response.items);
-      })
-  }
-
-  getUsersTotalCount = () => {
-    this.props.toggleIsFetching(true);   
-    usersApi.getUsersTotalCount().then(response => {
-        this.props.toggleIsFetching(false);
-        this.props.setUsersTotalCount(response.totalCount);
-        this.getPageCount(response.totalCount, this.props.usersInPageCount);
-      })
-  }
-
-  getPageCount = (usersTotalCount, usersInPageCount) => {
-    let pageCount = Math.ceil(usersTotalCount / usersInPageCount);
-    this.props.setPageCount(pageCount);
-  }
-
   onPageChange = (pageNum) => {
     this.props.setCurrentPage(pageNum);
-    this.getUsers();
+    this.props.getUsers(this.props.usersInPageCount, this.props.currentPage);
   }
 
   componentDidMount() {
-    this.getUsersTotalCount();
-    this.getUsers();
+    this.props.getUsersTotalCount(this.props.usersInPageCount);
+    this.props.getUsers(this.props.usersInPageCount, this.props.currentPage);
   }
-
-
 
   render() {
 
@@ -48,6 +22,8 @@ class UsersConteiner extends React.Component {
       <>
         {this.props.isFetching ? <Preloader /> : null}
         <Users onPageChange={this.onPageChange}
+          {...this.props}
+          /*
           currentPage={this.props.currentPage}
           pageCount={this.props.pageCount}
           usersTotalCount={this.props.usersTotalCount}
@@ -55,7 +31,8 @@ class UsersConteiner extends React.Component {
           follow={this.props.follow}
           unfollow={this.props.unfollow}
           fetchingFollower = {this.props.fetchingFollower}
-          fetchingFollowerList = {this.props.fetchingFollowerList}         
+          fetchingFollowerList = {this.props.fetchingFollowerList}  
+          */       
         />
       </>
 
@@ -65,7 +42,8 @@ class UsersConteiner extends React.Component {
 
 
 let mapStateToProps = (state) => {
-  return {
+  return {...state.UsersState}
+    /*
     users: state.UsersState.users,
     usersTotalCount: state.UsersState.usersTotalCount,
     pageCount: state.UsersState.pageCount,
@@ -73,10 +51,18 @@ let mapStateToProps = (state) => {
     usersInPageCount: state.UsersState.usersInPageCount,
     isFetching: state.UsersState.isFetching,
     fetchingFollowerList: state.UsersState.fetchingFollowerList
-  }
+    
+  }*/
 }
 
 
-let objDispatch = { follow, unfollow, setUsers, setUsersTotalCount, setPageCount, setCurrentPage, toggleIsFetching, fetchingFollower }
+let objDispatch = { setUsers, 
+                    setCurrentPage, 
+                    fetchingFollower, 
+                    getUsers: getUsersTC,
+                    getUsersTotalCount: getUsersTotalCountTC,
+                    follow: followTC,
+                    unfollow: unfollowTC
+                   }
 
 export default connect(mapStateToProps, objDispatch)(UsersConteiner);

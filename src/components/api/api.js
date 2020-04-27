@@ -37,5 +37,12 @@ class ProfileAPI {
   
 }
 
+class HeaderAPI {
+  authMe = () => {
+    return instanceAxios.get('auth/me').then(response => {return response.data});
+  }
+}
+
 export let profileApi = new ProfileAPI();
 export let usersApi = new UsersAPI();
+export let headerApi = new HeaderAPI();

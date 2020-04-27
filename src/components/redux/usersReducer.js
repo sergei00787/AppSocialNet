@@ -1,3 +1,5 @@
+import { usersApi } from './../api/api';
+
 const FOLLOW = "FOLLOW";
 const UNFOLLOW = "UNFOLLOW";
 const SET_USERS = "SETUSERS";
@@ -14,7 +16,7 @@ let initState = {
   usersInPageCount: 10,
   usersTotalCount: 0,
   isFetching: false,
-  fetchingFollowerList: [7491],
+  fetchingFollowerList: [],
   users: [
   ]
 }
@@ -28,7 +30,7 @@ const usersReducer = (state = initState, action) => {
         //users: [...state.users],
         users: state.users.map(u => {
           if (u.id === action.userId) {
-            return {...u, followed: true}
+            return { ...u, followed: true }
           }
           return u;
         })
@@ -41,7 +43,7 @@ const usersReducer = (state = initState, action) => {
         //users: [...state.users],
         users: state.users.map(u => {
           if (u.id === action.userId) {
-            return {...u, followed: false}
+            return { ...u, followed: false }
           }
           return u;
         })
@@ -49,35 +51,36 @@ const usersReducer = (state = initState, action) => {
     }
 
     case SET_USERS: {
-      return { ...state, users: action.users
+      return {
+        ...state, users: action.users
       }
     }
 
     case SET_USERS_COUNT: {
-      return {...state, usersTotalCount: action.usersTotalCount }
+      return { ...state, usersTotalCount: action.usersTotalCount }
     }
 
     case SET_PAGE_COUNT: {
-      return {...state, pageCount: action.pageCount}
+      return { ...state, pageCount: action.pageCount }
     }
 
     case SET_CURRENT_PAGE: {
-      return {...state, currentPage: action.page}
+      return { ...state, currentPage: action.page }
     }
 
     case TOGGLE_IS_FETCHING: {
-      return {...state, isFetching: action.isFetching}
+      return { ...state, isFetching: action.isFetching }
     }
 
     case FETCHING_FOLLOWER: {
       return {
-        ...state, 
-        fetchingFollowerList: action.isFetching 
-          ? [...state.fetchingFollowerList, action.userId ]   
-          : [ state.fetchingFollowerList.filter(id => id === action.userId)]
+        ...state,
+        fetchingFollowerList: action.isFetching
+          ? [...state.fetchingFollowerList, action.userId]
+          : [state.fetchingFollowerList.filter(id => id === action.userId)]
       }
     }
-    
+
     default:
       return state;
   }
@@ -88,8 +91,58 @@ export default usersReducer;
 export let follow = (userId) => ({ type: FOLLOW, userId });
 export let unfollow = (userId) => ({ type: UNFOLLOW, userId });
 export let setUsers = (users) => ({ type: SET_USERS, users });
-export let setUsersTotalCount = (usersTotalCount) => ({type: SET_USERS_COUNT, usersTotalCount});
-export let setPageCount = (pageCount) => ({type: SET_PAGE_COUNT, pageCount});
-export let setCurrentPage = (page) => ({type: SET_CURRENT_PAGE, page});
-export let toggleIsFetching = (isFetching) => ({type: TOGGLE_IS_FETCHING, isFetching});
-export let fetchingFollower = (isFetching, userId) => ({type: FETCHING_FOLLOWER, isFetching, userId})
+export let setUsersTotalCount = (usersTotalCount) => ({ type: SET_USERS_COUNT, usersTotalCount });
+export let setPageCount = (pageCount) => ({ type: SET_PAGE_COUNT, pageCount });
+export let setCurrentPage = (page) => ({ type: SET_CURRENT_PAGE, page });
+export let toggleIsFetching = (isFetching) => ({ type: TOGGLE_IS_FETCHING, isFetching });
+export let fetchingFollower = (isFetching, userId) => ({ type: FETCHING_FOLLOWER, isFetching, userId });
+
+export const getUsersTC = (usersInPageCount, currentPage) => {
+  return (dispatch) => {
+    dispatch(toggleIsFetching(true));
+    usersApi.getUsers(usersInPageCount, currentPage)
+      .then(response => {
+        dispatch(toggleIsFetching(false));
+        dispatch(setUsers(response.items));
+      });
+  }
+};
+
+export const getUsersTotalCountTC = (usersInPageCount) => {
+  return (dispatch) => {
+    dispatch(toggleIsFetching(true));
+    usersApi.getUsersTotalCount().then(response => {
+      dispatch(toggleIsFetching(false));
+      dispatch(setUsersTotalCount(response.totalCount));
+
+      let pageCount = Math.ceil(response.totalCount / usersInPageCount);
+      dispatch(setPageCount(pageCount));
+    });
+  }
+};
+
+export const followTC = (id) => {
+  return (dispatch) => {
+    dispatch(fetchingFollower(true, id));
+    usersApi.follow(id)
+      .then(response => {
+        if (response.resultCode === 0) {
+          dispatch(follow(id));
+          dispatch(fetchingFollower(false, id));
+        }
+      })
+  }
+}
+
+export const unfollowTC = (id) => {
+  return (dispatch) => {
+    dispatch(fetchingFollower(true, id));
+    usersApi.unfollow(id)
+      .then(response => {
+        if (response.resultCode === 0) {
+          dispatch(unfollow(id));
+          dispatch(fetchingFollower(false, id));
+        }
+      });
+  }
+}

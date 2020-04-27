@@ -5,7 +5,6 @@ import * as serviceWorker from './serviceWorker';
 import store from './components/redux/redux-store';
 import { BrowserRouter } from 'react-router-dom';
 import './index.css';
-//import {Provider} from './components/redux/context/store-context';
 import {Provider} from 'react-redux';
 
 // let rerender = (state) => {

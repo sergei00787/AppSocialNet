@@ -1,3 +1,5 @@
+import { headerApi } from './../api/api';
+
 const SET_AUTH_DATA = "SET_AUTH_DATA";
 const TOGGLE_IS_AUTH_FETCHING = "TOGGLE_IS_AUTH_FETCHING";
 
@@ -28,6 +30,18 @@ const authReducer = (state = initState, action) => {
 }
 
 export let setAuthData = (userId, email, login) => ({ type: SET_AUTH_DATA, userId, email, login });
-export let toggleIsAuthFetching = (isFetching) => ({ type: TOGGLE_IS_AUTH_FETCHING, isFetching })
+export let toggleIsAuthFetching = (isFetching) => ({ type: TOGGLE_IS_AUTH_FETCHING, isFetching });
+
+export const authMeTC = () => {
+  return (dispatch) => {
+    dispatch(toggleIsAuthFetching(true));
+    headerApi.authMe().then(response => {
+      dispatch(toggleIsAuthFetching(false));
+      let { id, email, login } = response.data;
+      dispatch(setAuthData(id, email, login));
+    })
+  }
+};
+
 
 export default authReducer;
