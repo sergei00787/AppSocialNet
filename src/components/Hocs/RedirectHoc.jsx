@@ -8,7 +8,7 @@ let mapStateAuthToProps = (state) => {
   }
 }
 
-const whitAuthRedirectHoc = (WrappedComponent) => {
+const withAuthRedirectHoc = (WrappedComponent) => {
 
   class Component extends React.Component {
     render() {
@@ -23,5 +23,5 @@ const whitAuthRedirectHoc = (WrappedComponent) => {
 
 }
 
-export default whitAuthRedirectHoc;
+export default withAuthRedirectHoc;
 
