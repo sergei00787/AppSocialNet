@@ -1,8 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { setUsers, setCurrentPage, fetchingFollower, getUsersTC, getUsersTotalCountTC, followTC, unfollowTC } from '../redux/usersReducer';
+import { setUsers, setCurrentPage, fetchingFollower, getUsersTC, getUsersTotalCountTC, followTC, unfollowTC } from '../../redux/usersReducer';
 import Users from './Users'
-import Preloader from './../Preloader/Preloader';
+import Preloader from '../Preloader/Preloader';
 
 class UsersConteiner extends React.Component {
 

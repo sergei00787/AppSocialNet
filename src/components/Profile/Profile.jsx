@@ -1,6 +1,6 @@
 import React from 'react';
 // import style from './Profile.module.css';
-import MyPostsConteiner from './MyPosts/MyPostsConteiner';
+import MyPostsConteiner from './MyPosts/MyPostsContainer';
 import Wallpaper from './Wallpaper/Wallpaper';
 
 
