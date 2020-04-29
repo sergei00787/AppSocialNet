@@ -2,6 +2,7 @@ import React from 'react';
 // import style from './Profile.module.css';
 import MyPostsConteiner from './MyPosts/MyPostsContainer';
 import Wallpaper from './Wallpaper/Wallpaper';
+import ProfileStatus from './ProfileStatus'
 
 
 
@@ -27,7 +28,7 @@ const Profile = (props) => {
         <div>{props.contacts.mainLink}</div>
         <img src={props.photos.large} alt=""/>
       </div>}
-      
+      <ProfileStatus />
       <MyPostsConteiner />
     </div>
   )
