@@ -34,6 +34,14 @@ class ProfileAPI {
   getProfile = (userId) => {
     return instanceAxios.get('profile/'+userId).then(response => {return response.data});
   }
+
+  getProfileStatus = (userId) => {
+    return instanceAxios.get('profile/status/' + userId).then(response => {return response.data});
+  }
+
+  setProfileStatus = (status) => {
+    return instanceAxios.put('profile/status', { status: status });
+  }
   
 }
 

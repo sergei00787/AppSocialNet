@@ -28,7 +28,7 @@ const Profile = (props) => {
         <div>{props.contacts.mainLink}</div>
         <img src={props.photos.large} alt=""/>
       </div>}
-      <ProfileStatus />
+      <ProfileStatus setProfileStatus = {props.setProfileStatus} status = {props.status}/>
       <MyPostsConteiner />
     </div>
   )
