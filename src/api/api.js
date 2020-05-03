@@ -3,7 +3,7 @@ import * as axios from 'axios';
 let instanceAxios = axios.create({
   baseURL: "https://social-network.samuraijs.com/api/1.0/",
   withCredentials: true,
-  headers: { "API-KEY": "bcb971f4-bdbf-4eeb-8ecd-aa42107df5c0" }
+  headers: { "API-KEY": "72a60229-0709-4844-9cad-13fdaebb067d" }
 })
 
 class UsersAPI {
@@ -51,6 +51,15 @@ class HeaderAPI {
   }
 }
 
+
+class LoginAPI {
+  login = (email,password,rememberMe,captcha) => {
+    return instanceAxios.put('/auth/login',{ email, password, rememberMe, captcha})
+     .then(response => { return response})
+  }
+}
+
 export let profileApi = new ProfileAPI();
 export let usersApi = new UsersAPI();
 export let headerApi = new HeaderAPI();
+export let loginApi = new LoginAPI();

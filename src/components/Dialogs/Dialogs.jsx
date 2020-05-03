@@ -2,16 +2,12 @@ import React from 'react';
 import style from './Dialogs.module.css'
 import DialogItem from './DialogItem/DialogItem';
 import Message from './Message/Message';
+import DialogFormRedux from './DialogForm';
 
 const Dialogs = (props) => {
 
-  let onSendMessage = () => {
-    props.sendMessage();
-  }
-
-  let onMessageChange = (event) => {
-    let text = event.target.value;
-    props.updateNewMessageText(text);
+  let onSendMessage = (value) => {
+    props.sendMessage(value.message);
   }
   
   const DialogsElements = props.dialogs.map(dialog => {
@@ -33,10 +29,9 @@ const Dialogs = (props) => {
       </div>
       <div className={style.messagesBox}>
         {MessagesElements}
-        <div className="containerMessAdd">
-          <textarea onChange={onMessageChange} value={props.newMessage} ></textarea>
-          <button className="addMessage" onClick={onSendMessage}>Add message</button>
-        </div>
+
+        <DialogFormRedux onSubmit={onSendMessage}/>
+        
       </div>
 
     </div>

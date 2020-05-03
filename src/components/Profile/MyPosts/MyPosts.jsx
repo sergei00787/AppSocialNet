@@ -1,18 +1,13 @@
 import React from 'react';
 // import cssMyPosts from './MyPosts.module.css'
 import Post from './Post/Post';
-
+import NewPostReduxForm from './NewPostReduxForm'
 
 const MyPosts = (props) => {
 
-  let onAddPost = () => {
-    props.addPost();
+  let onAddPost = (value) => {
+    props.addPost(value.newPost);
   }  
-
-  let onPostChange = (event) => {
-    let text = event.target.value;
-    props.updateNewPostText(text);
-  }
 
   const Posts = props.posts.map(post => {
     return (
@@ -21,14 +16,8 @@ const MyPosts = (props) => {
   });  
 
   return (
-    <div className="MyPosts">My Post
-      <div className="newPostContainer">
-        <textarea className="newPost" 
-                  value = {props.newPost} 
-                  onChange={onPostChange}/>
-
-        <button onClick = {onAddPost} >Add post</button>
-      </div>
+    <div className="MyPosts">
+      <NewPostReduxForm onSubmit={onAddPost} />
       { Posts }
     </div>
 
