@@ -1,5 +1,6 @@
-import { headerApi, loginApi, usersApi } from './../api/api';
+import { loginApi } from './../api/api';
 import { stopSubmit } from 'redux-form';
+import { authMeTC } from './../redux/appReducer';
 
 const SET_AUTH_DATA = "SET_AUTH_DATA";
 const TOGGLE_IS_AUTH_FETCHING = "TOGGLE_IS_AUTH_FETCHING";
@@ -42,19 +43,6 @@ const authReducer = (state = initState, action) => {
 export let setAuthData = (userId, email, login, isAuth ) => ({ type: SET_AUTH_DATA, payload: {userId, email, login, isAuth} });
 export let toggleIsAuthFetching = (isFetching) => ({ type: TOGGLE_IS_AUTH_FETCHING, isFetching });
 export let login = (email , password, rememberMe) => ({type: LOGIN, payload: {email , password, rememberMe}})
-
-export const authMeTC = () => {
-  return (dispatch) => {
-    dispatch(toggleIsAuthFetching(true));
-    headerApi.authMe().then(response => {
-      dispatch(toggleIsAuthFetching(false));
-      if (response.data.resultCode === 0) {
-        let { id, email, login } = response.data.data;
-        dispatch(setAuthData(id, email, login, true));
-      }      
-    })
-  }
-};
 
 export const loginTC = (email , password, rememberMe) => {
   return (dispatch) => {
