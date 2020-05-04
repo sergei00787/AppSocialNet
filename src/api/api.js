@@ -32,7 +32,7 @@ class UsersAPI {
 class ProfileAPI {
 
   getProfile = (userId) => {
-    return instanceAxios.get('profile/'+userId).then(response => { debugger; return response.data});
+    return instanceAxios.get('profile/'+userId).then(response => { return response.data});
   }
 
   getProfileStatus = (userId) => {

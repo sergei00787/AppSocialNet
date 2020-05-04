@@ -10,7 +10,6 @@ let LoginContainer = (props) => {
 
   let login= (values) => {
     props.login(values.email, values.password, values.remembeMe);
-    console.log(values);
   }
 
   if (props.isAuth) {

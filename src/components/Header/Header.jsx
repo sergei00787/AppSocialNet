@@ -20,7 +20,7 @@ let logout = () => {
         { props.isAuth  
           ? <div>
               <NavLink to='/profile'>{props.login}</NavLink>
-              <button onClick={logout}>LodOut</button>
+              <button onClick={logout}>Log Out</button>
             </div> 
           : <NavLink to={'/login'}>LogIn</NavLink> }
       </div>
