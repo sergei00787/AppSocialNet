@@ -5,8 +5,9 @@ import NewPostReduxForm from './NewPostReduxForm'
 
 const MyPosts = (props) => {
 
-  let onAddPost = (value) => {
+  let onAddPost = (value, e) => {
     props.addPost(value.newPost);
+    //e.target.reset();
   }  
 
   const Posts = props.posts.map(post => {
