@@ -3,7 +3,7 @@ import * as axios from 'axios';
 let instanceAxios = axios.create({
   baseURL: "https://social-network.samuraijs.com/api/1.0/",
   withCredentials: true,
-  headers: { "API-KEY": "72a60229-0709-4844-9cad-13fdaebb067d" }
+  headers: { "API-KEY": "dd386439-744d-4c39-9ab5-8f358cf58de7" }
 })
 
 class UsersAPI {
@@ -32,7 +32,7 @@ class UsersAPI {
 class ProfileAPI {
 
   getProfile = (userId) => {
-    return instanceAxios.get('profile/'+userId).then(response => {return response.data});
+    return instanceAxios.get('profile/'+userId).then(response => { debugger; return response.data});
   }
 
   getProfileStatus = (userId) => {
@@ -53,10 +53,13 @@ class HeaderAPI {
 
 
 class LoginAPI {
-  login = (email,password,rememberMe,captcha) => {
-    return instanceAxios.put('/auth/login',{ email, password, rememberMe, captcha})
-     .then(response => { return response})
+  login = (email,password,rememberMe = false) => {
+    return instanceAxios.post('/auth/login',{ email, password, rememberMe});
   }
+  logout = () => {
+    return instanceAxios.delete('/auth/login');
+  }
+
 }
 
 export let profileApi = new ProfileAPI();

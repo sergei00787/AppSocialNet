@@ -11,7 +11,7 @@ const LoginForm = (props) => {
         <Field name="email" type="text" component={InputControl} placeholder="email" validate = { [required, maxlength100] }/>
       </div>
       <div>
-        <Field name="password" type="text" component={InputControl} placeholder="password" validate = { [required, maxlength100] }/>
+        <Field name="password" type="password" component={InputControl} placeholder="password" validate = { [required, maxlength100] }/>
       </div>
       <div>
         <label htmlFor="">Remember me</label>

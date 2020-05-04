@@ -1,4 +1,4 @@
-import { headerApi, loginApi } from './../api/api';
+import { headerApi, loginApi, usersApi } from './../api/api';
 
 const SET_AUTH_DATA = "SET_AUTH_DATA";
 const TOGGLE_IS_AUTH_FETCHING = "TOGGLE_IS_AUTH_FETCHING";
@@ -12,7 +12,6 @@ let initState = {
   isAuth: false,
   password: null,
   rememberMe: false,
-  captcha: false
 }
 
 const authReducer = (state = initState, action) => {
@@ -20,10 +19,7 @@ const authReducer = (state = initState, action) => {
     case SET_AUTH_DATA: {
       return {
         ...state,
-        userId: action.userId,
-        email: action.email,
-        login: action.login,
-        isAuth: true
+        ...action.payload
       }
     }
 
@@ -34,10 +30,7 @@ const authReducer = (state = initState, action) => {
     case LOGIN: {
       return {
         ...state,
-        email: action.email,
-        password: action.password,
-        rememberMe: action.rememberMe,
-        captcha: action.captcha
+        ...action.payload
       }
     }
 
@@ -45,9 +38,9 @@ const authReducer = (state = initState, action) => {
   }
 }
 
-export let setAuthData = (userId, email, login) => ({ type: SET_AUTH_DATA, userId, email, login });
+export let setAuthData = (userId, email, login, isAuth ) => ({ type: SET_AUTH_DATA, payload: {userId, email, login, isAuth} });
 export let toggleIsAuthFetching = (isFetching) => ({ type: TOGGLE_IS_AUTH_FETCHING, isFetching });
-export let login = (email , password, rememberMe, captcha) => ({type: LOGIN, email , password, rememberMe, captcha})
+export let login = (email , password, rememberMe) => ({type: LOGIN, payload: {email , password, rememberMe}})
 
 export const authMeTC = () => {
   return (dispatch) => {
@@ -56,17 +49,27 @@ export const authMeTC = () => {
       dispatch(toggleIsAuthFetching(false));
       if (response.data.resultCode === 0) {
         let { id, email, login } = response.data.data;
-        dispatch(setAuthData(id, email, login));
+        dispatch(setAuthData(id, email, login, true));
       }      
     })
   }
 };
 
-export const loginTC = (email , password, rememberMe, captcha) => {
+export const loginTC = (email , password, rememberMe) => {
   return (dispatch) => {
-    loginApi.login().then(response => {
+    loginApi.login(email , password, rememberMe).then(response => {
       if (response.data.resultCode === 0) {
-        dispatch(login( email, password, rememberMe, captcha));
+        dispatch(authMeTC());
+      }      
+    })
+  }
+};
+
+export const logoutTC = () => {
+  return (dispatch) => {
+    loginApi.logout().then(response => {
+      if (response.data.resultCode === 0) {
+        dispatch(setAuthData(null, null, null, null));
       }      
     })
   }

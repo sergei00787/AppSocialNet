@@ -2,6 +2,7 @@ import React from 'react';
 import LoginReduxForm from './LoginForm';
 import { connect } from 'react-redux';
 import {loginTC} from './../../redux/authReducer'
+import { Redirect } from 'react-router-dom';
 
 
 
@@ -12,6 +13,10 @@ let LoginContainer = (props) => {
     console.log(values);
   }
 
+  if (props.isAuth) {
+    return <Redirect to={'/profile/' + props.userId} />
+  }
+
   return <div>
     <h1>LOGIN</h1>
     <LoginReduxForm onSubmit={login} />
@@ -20,7 +25,8 @@ let LoginContainer = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    userId: state.Auth.userId
+    userId: state.Auth.userId,
+    isAuth: state.Auth.isAuth
   }
 }
 

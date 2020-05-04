@@ -2,7 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import Profile from './Profile';
 import { getProfileTC, getProfileStatusTC, setProfileStatusTC } from '../../redux/profileReducer';
-import { withRouter, Redirect } from 'react-router-dom';
+import { withRouter} from 'react-router-dom';
 import whitRedirectHoc  from './../Hocs/RedirectHoc'
 import { compose } from 'redux';
 
