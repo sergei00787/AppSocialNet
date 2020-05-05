@@ -1,8 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { setUsers, setCurrentPage, fetchingFollower, getUsersTC, getUsersTotalCountTC, followTC, unfollowTC } from '../../redux/usersReducer';
+import { setUsers, setCurrentPage, fetchingFollower, requestUsersTC, getUsersTotalCountTC, followTC, unfollowTC } from '../../redux/usersReducer';
 import Users from './Users'
 import Preloader from '../Preloader/Preloader';
+import {getUsers, getUserTotalCount, getUserPageCount, 
+        getUserPage, getUsersInPageCount, getIsFetching, 
+        getFetchingFollowerList} from './../../redux/usersSelectors'
 
 class UsersConteiner extends React.Component {
 
@@ -42,24 +45,22 @@ class UsersConteiner extends React.Component {
 
 
 let mapStateToProps = (state) => {
-  return {...state.UsersState}
-    /*
-    users: state.UsersState.users,
-    usersTotalCount: state.UsersState.usersTotalCount,
-    pageCount: state.UsersState.pageCount,
-    currentPage: state.UsersState.currentPage,
-    usersInPageCount: state.UsersState.usersInPageCount,
-    isFetching: state.UsersState.isFetching,
-    fetchingFollowerList: state.UsersState.fetchingFollowerList
-    
-  }*/
+  return {
+    users:getUsers(state),  
+    usersTotalCount:getUserTotalCount(state),  
+    pageCount: getUserPageCount(state),
+    currentPage: getUserPage(state),
+    usersInPageCount: getUsersInPageCount(state),
+    isFetching: getIsFetching(state),
+    fetchingFollowerList: getFetchingFollowerList(state)
+  }
 }
 
 
 let objDispatch = { setUsers, 
                     setCurrentPage, 
                     fetchingFollower, 
-                    getUsers: getUsersTC,
+                    getUsers: requestUsersTC,
                     getUsersTotalCount: getUsersTotalCountTC,
                     follow: followTC,
                     unfollow: unfollowTC

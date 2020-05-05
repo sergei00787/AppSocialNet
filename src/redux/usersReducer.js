@@ -97,7 +97,7 @@ export let setCurrentPage = (page) => ({ type: SET_CURRENT_PAGE, page });
 export let toggleIsFetching = (isFetching) => ({ type: TOGGLE_IS_FETCHING, isFetching });
 export let fetchingFollower = (isFetching, userId) => ({ type: FETCHING_FOLLOWER, isFetching, userId });
 
-export const getUsersTC = (usersInPageCount, currentPage) => {
+export const requestUsersTC = (usersInPageCount, currentPage) => {
   return (dispatch) => {
     dispatch(toggleIsFetching(true));
     usersApi.getUsers(usersInPageCount, currentPage)
