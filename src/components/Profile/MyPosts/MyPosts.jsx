@@ -5,12 +5,13 @@ import NewPostReduxForm from './NewPostReduxForm'
 
 const MyPosts = (props) => {
 
+  let {addPost, posts} = props;
+
   let onAddPost = (value, e) => {
-    props.addPost(value.newPost);
-    //e.target.reset();
+    addPost(value.newPost);
   }  
 
-  const Posts = props.posts.map(post => {
+  const Posts = posts.map(post => {
     return (
       <Post key={post.id} message={post.message} countLikes={post.countLikes} />
     )

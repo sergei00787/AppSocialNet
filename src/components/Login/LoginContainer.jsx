@@ -4,28 +4,31 @@ import { connect } from 'react-redux';
 import {loginTC} from './../../redux/authReducer'
 import { Redirect } from 'react-router-dom';
 
+import {getUserId, getIsAuth} from './../../redux/authSelectors';
 
 
 let LoginContainer = (props) => {
 
-  let login= (values) => {
-    props.login(values.email, values.password, values.remembeMe);
+  let {login, userId, isAuth} = props;
+
+  let loginHandler = (values) => {
+    login(values.email, values.password, values.rememberMe);
   }
 
-  if (props.isAuth) {
-    return <Redirect to={'/profile/' + props.userId} />
+  if (isAuth) {
+    return <Redirect to={'/profile/' + userId} />
   }
 
   return <div>
     <h1>LOGIN</h1>
-    <LoginReduxForm onSubmit={login} />
+    <LoginReduxForm onSubmit={loginHandler} />
   </div>
 }
 
 const mapStateToProps = (state) => {
   return {
-    userId: state.Auth.userId,
-    isAuth: state.Auth.isAuth
+    userId: getUserId(state),
+    isAuth: getIsAuth(state)
   }
 }
 

@@ -6,17 +6,17 @@ import DialogFormRedux from './DialogForm';
 
 const Dialogs = (props) => {
 
-  let onSendMessage = (value) => {
-    props.sendMessage(value.message);
-  }
+  let {sendMessage, dialogs, messages } = props;
+
+  let onSendMessage = (value) => sendMessage(value.message);
   
-  const DialogsElements = props.dialogs.map(dialog => {
+  const DialogsElements = dialogs.map(dialog => {
     return (
       <DialogItem key={dialog.id} DialogName={dialog.dialogName} id={dialog.id} />
     )
   });
 
-  const MessagesElements = props.messages.map(message => {
+  const MessagesElements = messages.map(message => {
     return (
       <Message key={message.id} messageItem={message.message} />
     )

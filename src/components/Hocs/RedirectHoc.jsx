@@ -1,11 +1,12 @@
 import React from 'react';
 import { Redirect } from 'react-router-dom';
 import {connect} from 'react-redux';
+import {getUserId, getIsAuth } from '../../redux/authSelectors';
 
-let mapStateAuthToProps = (state) => {
+let mapStateToProps = (state) => {
   return {
-    isAuth: state.Auth.isAuth,
-    userId: state.Auth.userId
+    userId: getUserId(state),
+    isAuth: getIsAuth(state)
   }
 }
 
@@ -18,7 +19,7 @@ const withAuthRedirectHoc = (WrappedComponent) => {
     }
   }
 
-  let AuthComponent = connect(mapStateAuthToProps)(Component)
+  let AuthComponent = connect(mapStateToProps)(Component)
 
   return AuthComponent;
 

@@ -6,9 +6,11 @@ import { withRouter } from 'react-router-dom';
 import whitRedirectHoc from './../Hocs/RedirectHoc'
 import { compose } from 'redux';
 import Preloader from '../Preloader/Preloader';
+import {GetProfile, GetStatus} from '../../redux/profileSelectors';
 
 
 class ProfileContainer extends React.Component {
+  
   componentDidMount() {
     let userId = (this.props.match.params.userId !== undefined) ? this.props.match.params.userId : this.props.userId
     this.props.getProfile(userId);
@@ -26,8 +28,8 @@ class ProfileContainer extends React.Component {
 
 let mapStateToProps = (state) => {
   return {
-    profile: state.ProfileState.profile,
-    status: state.ProfileState.status,
+    profile: GetProfile(state),
+    status: GetStatus(state)
   }
 }
 

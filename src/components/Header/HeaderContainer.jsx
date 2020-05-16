@@ -3,14 +3,16 @@ import Header from './Header';
 import { connect } from 'react-redux';
 import { logoutTC } from './../../redux/authReducer';
 import { authMeTC } from './../../redux/appReducer';
+import {getUserId, getEmail, getLogin, getIsAuthFetching, getIsAuth } from '../../redux/authSelectors';
 
-class HeaderContainer extends React.Component {
+class HeaderContainer extends React.Component {  
 
   componentDidMount() {
-    if (!this.props.isAuth) {
-      this.props.authMe();
-    }
+    let {isAuth, authMe} = this.props;
 
+    if (!isAuth) {
+      authMe();
+    }
   }
 
   render() {
@@ -22,11 +24,11 @@ class HeaderContainer extends React.Component {
 
 let mapStateToProps = (state) => {
   return ({
-    userId: state.Auth.userId,
-    email: state.Auth.email,
-    login: state.Auth.login,
-    isAuthFetching: state.Auth.isAuthFetching,
-    isAuth: state.Auth.isAuth
+    userId: getUserId(state),
+    email: getEmail(state),
+    login: getLogin(state),
+    isAuthFetching: getIsAuthFetching(state),
+    isAuth: getIsAuth(state)
   })
 
 }

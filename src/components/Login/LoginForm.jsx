@@ -6,8 +6,9 @@ import {required, maxLengthCreator} from './../../utils/validators/validators';
 const maxlength100 = maxLengthCreator(30);
 
 const LoginForm = (props) => {
+  let {handleSubmit, error} = props;
   return (
-    <form onSubmit={props.handleSubmit}>
+    <form onSubmit={handleSubmit}> 
       <div>
         <Field name="email" type="text" component={InputControl} placeholder="email" validate = { [required, maxlength100] }/>
       </div>
@@ -19,7 +20,7 @@ const LoginForm = (props) => {
         <Field name="rememberMe" type="checkbox" component={InputControl} />
       </div>
       <div  className="formLoginError">
-      { props.error && <strong>{props.error}</strong>}
+      { error && <strong>{error}</strong>}
       </div>
       
       <div>

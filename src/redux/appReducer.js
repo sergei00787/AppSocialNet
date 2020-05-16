@@ -1,8 +1,8 @@
 
-import { headerApi} from './../api/api';
-import {setAuthData} from './authReducer'
+import { headerApi } from './../api/api';
+import { setAuthData } from './authReducer'
 
-const SUCCESS_INITIALIZED = 'SUCESS_INITIALIZED';
+const SUCCESS_INITIALIZED = 'appSocialNet/appRed/SUCESS_INITIALIZED';
 
 let initState = {
   initialized: false
@@ -24,21 +24,19 @@ export default appReducer;
 
 export let initialize = () => ({ type: SUCCESS_INITIALIZED });
 
-export const authMeTC = () => {
-  return (dispatch) => {
-    headerApi.authMe().then(response => {
-      if (response.data.resultCode === 0) {
-        let { id, email, login } = response.data.data;
-        dispatch(setAuthData(id, email, login, true));
-      }      
-    })
+export const authMeTC = () => async (dispatch) => {
+  let response = await headerApi.authMe();
+
+  if (response.data.resultCode === 0) {
+    let { id, email, login } = response.data.data;
+    dispatch(setAuthData(id, email, login, true));
   }
 };
 
-export let initializeApp = () => { 
+export let initializeApp = () => {
   return (dispatch) => {
     let promise = dispatch(authMeTC);
-    Promise.all([promise]).then( response => {
+    Promise.all([promise]).then(response => {
       dispatch(initialize());
     })
   }
